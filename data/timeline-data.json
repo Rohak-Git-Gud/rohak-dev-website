@@ -1,0 +1,68 @@
+[
+	{
+		"id": 1,
+		"category": "education",
+		"title": "B. Sc., Computer Science",
+		"organization": "Mithibai College, University of Mumbai",
+		"startDate": "Jul-2019",
+		"endDate": "Apr-2022",
+		"description": "Gained a comprehensive foundation in computational logic, algorithms and DBMS. Focused on designing efficient data structures and applying mathematical principles to solve complex technical challenges. Emphasized clean code practices and structured problem-solving through intensive, project-based learning.",
+		"skills": ["SDLC & Software Architectural Design", "Computer Networking", "Data Structures & Algorithms", "DBMS"],
+		"image": "/images/timeline/mithibai.jpg"
+	},
+	{
+		"id": 2,
+		"category": "work",
+		"title": "Intern, Growth Training Program",
+		"organization": "MICM",
+		"startDate": "Aug-2021",
+		"endDate": "Dec-2021",
+		"description": "Developed functional ERP and CRM modules for academic institutions. Collaborated in an Agile environment to build modular features and optimized backend logic through large-scale data analysis.",
+		"skills": ["C#", "ASP.NET", "Python", "Data Analysis", "Agile"],
+		"image": "/images/timeline/micm.jpg"
+	},
+	{
+		"id": 3,
+		"category": "work",
+		"title": "QE Analyst, Performance & SRE",
+		"organization": "Accenture",
+		"startDate": "Jul-2022",
+		"endDate": "Dec-2024",
+		"description": "Transformed performance operations for a Fortune 500 consumer electronics leader by delivering a 30% boost in system capacity and halving project timelines through custom automation. Specialized in root-cause analysis of bottlenecks and modernized testing infrastructure.",
+		"skills": ["Performance & SRE", "RCA & Optimization", "Automation", "Bash", "Docker", "Node.js", "Python"],
+		"image": "/images/timeline/accenture.jpg"
+	},
+	{
+		"id": 4,
+		"category": "break",
+		"title": "Medical Break",
+		"organization": "Personal",
+		"startDate": "Jan-2025",
+		"endDate": "Apr-2025",
+		"description": "Not declaring my medical history and diagnosis here. But, it's resolved.",
+		"skills": ["Patience", "Tenacity", "Resilience"],
+		"image": "/images/timeline/medical.jpg"
+	},
+	{
+		"id": 5,
+		"category": "upskilling",
+		"title": "Projects & Certifications",
+		"organization": "Personal",
+		"startDate": "Apr-2025",
+		"endDate": "Present",
+		"description": "Developed a stateless, Zero Trust CLI tool that uses multi-stage hashing to eliminate credential storage risks. Conducted an architectural study by building parallel CMS implementations to benchmark ORM efficiency and middleware scalability under high-load scenarios. Prepared and cleared AWS CLF-C02. Built this website. Currently pursuing CompTIA Security+.",
+		"skills": ["Zero Trust Model", "Research & Analysis", "AWS CLF-C02", "CompTIA Security+", "Django", "Express.js", "Next.js"],
+		"image": "/images/timeline/upskilling.jpg"
+	},
+	{
+		"id": 6,
+		"category": "work",
+		"title": "Technical Consultant",
+		"organization": "Freelancer",
+		"startDate": "Jul-2025",
+		"endDate": "Present",
+		"description": "Engineered an automated invoicing OCR pipeline to transform unstructured invoice data into structured insights. Led a comprehensive full-stack audit for an e-commerce platform, delivering strategic optimizations for performance, security hardening and WCAG accessibility.",
+		"skills": ["Technical Audit", "Automation", "Python", "n8n", "Tessaract OCR"],
+		"image": "/images/timeline/freelancer.jpg"
+	}
+]

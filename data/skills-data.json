@@ -1,0 +1,71 @@
+[
+	{
+		"category": "languages",
+		"title": "Languages",
+		"skills": [
+			{ "name": "Python", "proficient": true },
+			{ "name": "TypeScript", "proficient": true },
+			{ "name": "JavaScript" },
+			{ "name": "C#"},
+			{ "name": "Java"},
+			{ "name": "Go"},
+			{ "name": "Bash" }
+		]
+	},
+	{
+		"category": "frameworks",
+		"title": "Frameworks & Libraries",
+		"skills": [
+			{ "name": "Django", "proficient": true },
+			{ "name": "Express.js" },
+			{ "name": "Next.js", "proficient": true },
+			{ "name": "ASP.NET"}
+		]
+	},
+	{
+		"category": "databases",
+		"title": "Databases",
+		"skills": [
+			{ "name": "PostgreSQL", "proficient": true },
+			{ "name": "MongoDB" },
+			{ "name": "Redis" },
+			{ "name": "SQLite" },
+			{ "name": "InfluxDB" }
+		]
+	},
+	{
+		"category": "devsecops",
+		"title": "DevSecOps & Cloud",
+		"skills": [
+			{ "name": "AWS" },
+			{ "name": "Jenkins", "proficient": true },
+			{ "name": "Nmap" },
+			{ "name": "Wireshark" },
+			{ "name": "Nginx" },
+			{ "name": "Docker" },
+			{ "name": "Kubernetes" }
+		]
+	},
+	{
+		"category": "observability",
+		"title": "Observability",
+		"skills": [
+			{ "name": "Grafana", "proficient": true },
+			{ "name": "Dynatrace", "proficient": true },
+			{ "name": "AppDynamics" }
+		]
+	},
+	{
+		"category": "tools",
+		"title": "Tools & Other Misc.",
+		"skills": [
+			{ "name": "Linux", "proficient": true },
+			{ "name": "Git", "proficient": true },
+			{ "name": "Antigravity", "proficient": true },
+			{ "name": "REST APIs", "proficient": true },
+			{ "name": "Postman" },
+			{ "name": "NeoLoad" },
+			{ "name": "JMeter" }
+		]
+	}
+]

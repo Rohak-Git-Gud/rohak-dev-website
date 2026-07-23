@@ -1,0 +1,33 @@
+[
+	{
+		"id": 1,
+		"title": "CMS Arch Research",
+		"description": "Built parallel CMS implementations to benchmark efficiency and scalability. Conducted stress tests to evaluate performance. Leveraged AI-driven prototyping to streamline the SDLC.",
+		"skills": ["Research", "Full-Stack", "Perf Benchmarking", "Python", "Django", "JavaScript", "Express.js"],
+		"githubUrl": "/research-cms-archs-express-django",
+		"createdDate": "Jul-2025",
+		"isLive": false,
+		"image": "/images/projects/cms-archs.jpg"
+	},
+	{
+		"id": 2,
+		"title": "Credntial Retriever",
+		"description": "Engineered a stateless CLI utility that generates creds using multi-stage recursive hashing and salting. Need for credential storage evaporates along with DB leak risks.",
+		"skills": ["Zero Trust Model", "Python", "Hash & Salt"],
+		"githubUrl": "/password-generator-py",
+		"createdDate": "Sep-2025",
+		"isLive": false,
+		"image": "/images/projects/cred-retreiver.jpg"
+	},
+	{
+		"id": 3,
+		"title": "Dev Site Template",
+		"description": "A high-performance personal website template built with a developer-first mindset. Featuring a centralized data hub for managing site content by driving everything through simple, easy-to-edit data files. You're HERE.",
+		"skills": ["Dev Website", "Template", "Next.js", "TypeScript", "Tailwind CSS", "ShadCN"],
+		"githubUrl": "/rohak-dev-website",
+		"createdDate": "Apr-2026",
+		"isLive": true,
+		"liveUrl": "https://rohak-dev.vercel.app/",
+		"image": "/images/projects/dev-template.jpg"
+	}
+]

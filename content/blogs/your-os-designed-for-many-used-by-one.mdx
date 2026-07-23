@@ -1,0 +1,167 @@
+---
+title: "Your OS: Designed for Many, Used by One"
+date: "May-2026"
+description: "Personal computers are used by one person. So why does the OS design assume otherwise? A design proposal for how I'd do it differently."
+tags: ["os", "architecture", "design", "opinion", "windows", "linux"]
+status: "readable"
+---
+
+I reinstalled Windows few months ago. Three days later, I was still not done with the Settings, Control Panel, Admin account setup and Software installations.
+
+Uninstalling unnecessary or unused stuff is the next nightmare. `APPDATA` (Local, LocalLow, Roaming), `Program Files` (Normal and x86), `ProgramData`, registry, random folders buried in `Documents`. Don't get me started on the million `cache` and `temp/tmp` directories.
+
+Each one is a breadcrumb left behind by an app that assumed it could scatter its files wherever it pleased and you should be fine with it. I wasn't fine with it.
+
+**Revo Uninstaller** and equivalent tools exists entirely because Windows can't clean up after itself. These *third-party tools'* entire purpose is to fix a problem that shouldn't exist. And it's still clunky: values (set/unset) mismatch between the app and the system, updating values in the app doesn't change the system settings, etc.
+
+Linux is better, but not solved. Dotfiles and directories in `~/.config`, `~/.local`, `~/.cache`, package conflicts between system-wide and user-wide installs. There's an ongoing argument, that's been going on for decades, about where things should live.  It hasn't produced a consensus.
+
+Same problem. Different aesthetics.
+
+---
+
+## Brief History on OS Design Choices
+
+This isn't accidental. Blame historical tech-debt.
+
+Modern OS architecture descends from multi-user mainframe and Unix traditions where many users shared one machine. Separating user data, system data and application data made sense when the alternative was users reading each other's files.
+
+But that's not how most personal computers are used today. My laptop has one user. Most company devices have one owner. The multi-user security model is still there, largely intact, protecting me from... myself and making sure I don't hand over the keys to the system to a bad actor due to a misclick or not reading installation permissions.
+
+The architecture hasn't caught up with the use case.
+
+---
+
+## My 3-Pointer Design Principles
+
+This isn't an implementation proposal and I'm not writing a kernel. These are design suggestions: a set of principles I'd want an OS to follow, **IF** I had a say in development. These are OS-agnostic principles, applicable to Windows or Linux equally.
+
+### 1. One User, One Pseudo-Sudo
+
+A personal OS should have exactly two privilege levels:
+
+- **The user:** you, for everything you do day to day.
+- **A pseudo-sudo account:** for installs, system changes and anything that touches the OS itself.
+
+The critical distinction: the pseudo-sudo account has a separate password from your sign-in password, and it has no home directory, no user data, no persistent session. It exists only to authorise privileged actions. It is not a person, it is **ONLY** a key.
+
+No root with a home directory. No administrator account you accidentally leave logged in. No `sudo` that remembers your password for five minutes and quietly lets the next command through.
+
+Two clear levels with a hard boundary between them.
+
+### 2. App-Local Everything
+
+Every installed application should own its own config, cache and data, stored within its own directory. Not in `%APPDATA%`. Not in `~/.config/appname`. In the app directory itself.
+
+The benefits are obvious once you say them out loud:
+
+- Uninstalling an app means deleting its folder. Nothing left behind.
+- Moving an app means moving its folder. Config comes with it.
+- Auditing what an app stores means looking in one place.
+
+The default should be: your files live with you, the app's files live with the app.
+
+### 3. One Global Config SEAN File
+
+System settings: display, network, audio, locale, power, etc., should live in a single, human-readable global config file. One file, I dub as `global-conf.sean`.
+
+**SEAN** *(pronounced as "Shaun", a nod to JSON file type and Heavy Rain, the game)* stands for: **S**ystem **E**ntity **A**ttribute **N**otation file. Format or nomenclature is less important than the principle though.
+
+Template `global-conf.sean`: -
+
+```sean
+# global-conf.sean
+# System Entity Attribute Notation
+# Version: 1.0.0
+
+[system]
+system-name     = my-machine
+architecture    = x86_64
+
+-> [display]
+# Display nested inside system and can be called as display.resolution alternatively
+resolution      = 2560x1440
+refresh_rate    = 144
+scaling         = 125%
+
+-> [audio]
+# alternate nesting method
+output.device   = default
+output.volume   = 25
+input.device    = default
+input.volume    = 100
+
+--> [headphones]
+# Headphones settings nestes inside audio, which in turn is, inside system
+
+[power]
+sleep.on_battery     = 15min
+sleep.on_ac          = 30min
+fast_boot            = false
+
+[network]
+hostname        = my-machine
+dns.primary     = 1.1.1.1
+dns.secondary   = 8.8.8.8
+ipv6            = true
+firewall.mode   = strict
+
+[security]
+screen_lock          = true
+screen_lock.timeout  = 5min
+encrypt_storage      = true
+pseudo_sudo.timeout  = 0
+```
+
+This is better than settings scattered across a registry with 200,000 keys, or being split between `/etc`, `/usr/share`, and a dozen other locations, or requiring a GUI to change a setting that is, fundamentally, just a key-value pair.
+
+One file. Version-controllable. Readable without a special tool. Transferable to a new machine without hassle.
+
+---
+
+## The Benefits
+
+If these three principles were the default, a few things become possible that currently aren't.
+
+- **Reproducible setups:** If your system config lives in one file and apps are self-contained, your entire OS setup becomes version-controllable. Fresh install means cloning a repo and running a script. Your `global-conf.sean` is your IaC.
+- **Automated CI/CD:** System changes go through a pipeline, not a manual click-through. Roll back a bad config change the same way you'd roll back a bad deploy. This exists for servers. It should exist for personal machines too.
+- **Pre-hardened images:** One can easily build and distribute a baseline image as an add-on. For e.g., a hardened Windows or a Windows-like Linux distro becomes easier to build, maintain and distribute when the architecture supports it.
+- **True portability:** New machine, same environment. No dotfile managers, backup tools or manual reinstallation. Just the file and the app folders.
+
+---
+
+## Already Available Alternatives
+
+I'm not claiming these ideas are new. I'm claiming they're not the default and they should be, at least for power users, developers or even in a singly owned system.
+
+- **NixOS** comes closest to my principle 3. Its declarative `configuration.nix` is similar to the kind of global config I'm describing. The trade-off is complexity. NixOS has a steep learning curve that makes it inaccessible to most users.
+- **Flatpak and Snap** move toward my principle 2. Containerised apps with sandboxed storage. But they layer on top of existing systems rather than replacing the underlying model, and config portability is still limited.  
+**macOS app bundles** gets it right for most apps. But `~/Library` still exists, still accumulates and still requires manual archaeology to clean.
+- **ChromeOS** implements principle 1 in spirit. It's a single-user OS with a simple privilege model. The trade-off is that it's also a locked-down, cloud-dependent system that trades local control for simplicity.
+
+None of them implement all three. None of them make these principles the default, out of the box, for a general-purpose OS.
+
+---
+
+## The Current Blockers
+
+I've been arguing one side. Here's the other.
+
+- **Shared state is a real problem.** If every app owns its config locally, *what happens when two apps need to communicate?* A global config for system settings is clean, but apps interact with each other as much as the system. Some shared state is necessary or maybe a non-conventional way of thinking and implementation.
+- **The pseudo-sudo model has edge cases.** *What happens with background services that always need admin access?* Daemons, update managers, antivirus. These don't fit neatly into "user action requiring a one-time key". The model works for interactive installs. It gets complicated for persistent system processes. App/process level elevation can be a thing, but that opens another can of security worms.
+- **Backwards compatibility.** Any OS that wanted to implement this would be breaking decades of software assumptions. Apps expect `%APPDATA%` to exist. They expect to write to `/etc`. *Path migrations are hard.*
+
+These aren't reasons not to try. They're reasons the design is harder than it looks.
+
+---
+
+## Final Notes
+
+- I want to reinstall my OS and be productive in the matter of hours, not days.
+- I want to uninstall an app and have it actually be gone.
+- I want to understand what my system is doing by reading a file, not running a registry editor with seemingly random numbers treated as flag/conditional values/parameters.
+- Personal computers are personal. The OS should be designed like it knows that.
+
+**PS:** *This is a design opinion piece, not an implementation proposal. If you disagree with the trade-offs or think I've missed something, let's chat. I'd genuinely like to hear more on this.*
+
+---

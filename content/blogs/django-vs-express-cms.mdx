@@ -1,0 +1,151 @@
+---
+title: "Technical Write-up: Comparing CMS Architectures"
+date: "May-2026"
+description: "I built the same CMS twice, once in Express.js with MongoDB and once in Django with SQLite. Here's what I learnt."
+tags: ["django", "expressjs", "architecture", "research", "backend", "python", "javascript"]
+status: "readable"
+---
+
+I had a question I couldn't answer from documentation alone: *how different does it actually feel to build similar systems in Django vs Express.js?*
+
+Similar features and scope, but two different stacks: built in parallel so the comparison would be honest. This post is the *pseudo-technical* summary of what I observed.
+
+***
+
+## The Project
+
+A Blog/CMS with standard requirements: user authentication, post creation and management, media uploads, role-based access (User and Admin) and a templated frontend (nothing exotic). The kind of system where framework and architecture matter more than LAF *(Look and Feel)*.
+
+| Component | Express.js | Django |  
+| --------- | ---------- | ------ |  
+| **Runtime** | Node.js (JavaScript) | Python 3.13 |  
+| **Database** | MongoDB via Mongoose | SQLite via Django ORM |  
+| **Authentication** | Manual JWT + cookie-parser | Django Built-in Auth |  
+| **Media Handling** | multer (server-side storage) | FileField / ImageField |  
+| **Templating** | EJS + Bootstrap 5 | Django Templates + Bootstrap 5 |  
+
+Both implementations are in separate repositories. The goal was **functional parity**, not just similar features, but equivalent behaviour so the comparison would be meaningful and as fair and impartial as possible.  
+*Both repositories are linked in the [README](https://github.com/Rohak-Git-Gud/research-cms-archs-express-django) file if you want to look at the full implementations.*
+
+---
+
+## Authentication: Visible Contrast
+
+This is where the difference between the two frameworks is most visible. Not in logic flow but its implementation.
+
+### Express.js: You Own Everything
+
+In Express, authentication doesn't exist until you build it. Here's the user model handling password hashing and login validation:
+
+```javascript
+// Pre-save: salt generation and hashing
+userSchema.pre("save", function (next) {
+  const user = this;
+  if (!user.isModified("password")) return next();
+
+  const salt = randomBytes(64).toString();
+  const passwordHash = createHmac("sha256", salt)
+    .update(user.password)
+    .digest("hex");
+
+  this.salt = salt;
+  this.password = passwordHash;
+  next();
+});
+
+// Login: validate credentials and return token
+userSchema.static("userValidatorandTokenise", async function (email, password) {
+  const user = await this.findOne({ email });
+  if (!user) throw new Error("User Not Found");
+
+  const hashChk = createHmac("sha256", user.salt)
+    .update(password)
+    .digest("hex");
+
+  if (hashChk !== user.password) throw new Error("Incorrect Password");
+
+  return createUserToken(user);
+});
+```
+
+This is before touching JWT issuance, cookie management or route protection middleware, all of which live in separate files that you have to write as well.
+
+- **The upside:** you understand exactly what's happening at every step.  
+- **The downside:** every step is a surface area for mistakes.
+
+### Django: The Framework Handles It
+
+The Django equivalent for user profiles is this:
+
+```python
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(default="default.jpg", upload_to="profile_pics")
+
+    def __str__(self):
+        return f"{self.user.username}'s Profile"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.image.path)
+        if img.height > 480 or img.width > 480:
+            op_size = (480, 480)
+            img.thumbnail(op_size)
+            img.save(self.image.path)
+```
+
+The `Profile` model handles the custom parts: profile photo with auto-resizing.  
+Password hashing, session management, login/logout views, CSRF protection, the admin interface, all of that comes from `django.contrib.auth`, which you import in one line.
+
+- **The upside:** The entire custom auth logic is roughly zero lines in Django.  
+- **The downside:** Sometimes it may feel rigid to the 'tinkerers'.
+
+---
+
+## Data Modelling: Flexibility vs. Integrity
+
+**MongoDB with Mongoose** gave you schema flexibility and document structure could evolve without migrations. For a project where post metadata might change frequently, that's an advantage.
+
+**Django's ORM** enforced relational integrity from the start. Every schema change goes through a migration. That may seem like a time-loss during development, but it is this friction that prevents bugs where your data structure and application logic drift apart.
+
+**Neither is universally better**.
+- The answer: if your *data structure is uncertain*, MongoDB's flexibility is worth having.
+- If your *data structure is known upfront*, Django's migrations give you a paper trail and consistency guarantees that are hard to replicate manually.
+ 
+---
+ 
+## Developer Velocity: Whatcha Ya Building
+
+- **Django** won on features that map directly to what the framework provides out-of-the-box. The admin interface appears in about 10 lines of configuration. User management, permissions, CRUD scaffolding, placeholder/fake data, all faster.
+- **Express.js** won on understanding. Building the middleware pipeline manually meant you could debug it precisely, extend it without fighting the framework and understand exactly what each request was doing at every point in its lifecycle.
+
+**The pattern I noticed:** Django is faster when the framework has already solved your problem. Express is faster when it hasn't, because you're not working around someone else's abstractions.
+ 
+---
+ 
+## Security Posture
+ 
+This is where I'd push back against the framing that custom implementations are inherently more flexible or powerful.
+
+- **Django**'s session management, CSRF protection and password hashing are production-hardened defaults. They're not configurable because the correct configuration is already in place.
+- **Express** implementation requires you to make explicit decisions about salt length, hash algorithm, cookie configuration and token expiry. I feel like I made reasonable choices, but they were **my** choices, made at implementation time and they're only as good as **my knowledge at that moment**.
+
+For security-sensitive logic specifically, "batteries included" maybe is better if you're not deep in security engineering. If you know what you're doing and aren't bothered by time constraints, you can try custom auth.
+
+---
+ 
+## Takeaway: Stop thinking about food
+
+Building both taught me something the documentation doesn't say directly: the choice between Express.js vs Django isn't just about JavaScript vs Python. It's about how much of the stack you want to own. Apart from that, if you're a working professional, you also have to take into consideration, the leadership and the existing tech that might give you nightmares during integration testing if you chose incompatible stack.
+
+**Express** is like an empty house with just walls where you can design your interior while **Django** is like moving into a fully furnished house.
+
+On the reference projects, both implementations were built with reference to these two tutorial series:
+- [Corey Schafer's Django series](https://www.youtube.com/playlist?list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p)
+- [Piyush Garg's Node + Express series](https://www.youtube.com/playlist?list=PLinedj3B30sDby4Al-i13hQJGQoRQDfPo)
+
+The implementations follow both references closely with minor tweaks. Comments functionality was intentionally excluded from both to keep the scope focused on the architectural comparison rather than feature completeness.
+
+What's worth noting: the tutorials reflect their frameworks' philosophies as much as the frameworks themselves do. Corey's series is methodical and production-minded, it teaches you Django the way Django wants to be used. Piyush's series is fast and mechanical, it prioritises understanding what's actually happening under the hood over getting to a finished product quickly. The code difference and the teaching difference point in the same direction.
+
+---

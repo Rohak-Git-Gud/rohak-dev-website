@@ -1,0 +1,20 @@
+{
+	"me": [
+		"I've always believed that a system is never truly strong. My workday includes architecting secure and scalable backends. I build with the precision of a performance engineer and the mindset of an SRE, i.e., I want it to be as unbreakable as possible.",
+		"To me, finding a leak when the room is already underwater isn't impressive. Most people just wait for a scan to turn red before they start looking for a hole. I’m interested in the plumbing, not the cleanup. I don't believe in 50-page PDFs of \"maybe\" bugs. I'm interested in baking security into the CI/CD pipeline so tightly that code is resilient by default. Some people are satisfied with checking a box, but I'm only satisfied when the system is a well-oiled machine.",
+		"When I'm not working, you'll find me either immersed in a game or in a long study session for any new topic/tool that piques my interest in that point of time. As a physically challenged developer, I tend to do my best work from a digital-first environment. I'm always looking to connect with new and like minded folks."
+	],
+	"stack": ["Next.js", "Tailwind CSS", "TypeScript", "Shadcn UI", "Framer Motion", "Gray Matter", "MDX Remote"],
+	"site": [
+		"This is my corner of the web, which is basically a monument to why I stay on the server side. Look, I’m not a Front-End Engineer but I tried, okay? This site is held together by sheer willpower and a stack of Stack Overflow tabs and LLM chats open that made my RAM cry. I treated this site like a Tier-0 service. It’s got optimized section loading, custom page loading states and I’ve run enough performance and security audits on this thing to satisfy a cynical CTO.",
+		"I have spent multiple days and a chunk from of my sanity on perfecting animations that 90% of you won't even notice because you’re probably scrolling too fast. Some probably won’t even trigger if your internet is slow. If you’re wondering why the default placeholders look a bit... ඞ, it’s because they are. These are blatantly grabbed from Google Images. If the site looks weird, it’s because you’re holding your phone wrong. It’s best experienced from a Desktop Browser or on Mobile in Landscape Mode. I’m not building for every screen size in the universe.",
+		"I can't be bothered by the favicon not switching light/dark mode properly (especially in Firefox). Seriously, open an issue on GitHub if you know how to fix it."
+	],
+	"siteSourceRepo": "/dev-website-template",
+	"privacy": [
+		"The short version: I’m not tracking you. I don’t collect personal data, I don't use tracking cookies, and I have no interest in your browsing habits.",
+		"The technical version: This site is hosted on Vercel. Like any modern hosting platform, they gather standard observability data. This includes basic metadata that's never touched by me and is used strictly for site stability (or at least that's what they claim).",
+		"All in all:"
+	],
+	"pointers": ["No cookies are used.", "No first-party analytics trackers.", "No advertising scripts."]
+}

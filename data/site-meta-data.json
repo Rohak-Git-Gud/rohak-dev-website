@@ -1,0 +1,36 @@
+{
+	"domain": "rohak.dev",
+	"siteUrl": "https://rohak-dev.vercel.app/",
+	"name": "Rohak",
+	"role": "Backend",
+	"secondary": "Performance Engg. / SRE",
+	"tertiary": "Cybersecurity",
+	"location": "Mumbai, India",
+	"birthYear": "2000",
+	"photoPath": "/images/photo-album/hero.jpg",
+	"aboutMe": [
+		"I build backend systems with the precision of a performance engineer and the mindset of an SRE.",
+		" I thrive on solving complex architectural puzzles and ensuring every line of code is as resilient as it is efficient and twice as secure.",
+		" I’m actively bridging the gap between robust engineering and the world of cybersecurity."
+	],
+	"socials": {
+		"github": "https://github.com/Rohak-Git-Gud",
+		"linkedin": "https://www.linkedin.com/in/rohak-savani",
+		"devto": "https://dev.to/rohak-dev",
+		"email": "rhs1080.99.work@gmail.com"
+	},
+	"seo": {
+		"title": "rohak.dev",
+		"description": "Personal website of Rohak, a Software Developer specializing in Backend and Performance Engg. / SRE. Cybersecurity Enthusiast.",
+		"keywords": [
+			"rohak.dev",
+			"Rohak Savani",
+			"Software Developer",
+			"Software Engineer",
+			"Backend",
+			"Performance Engg./SRE",
+			"Cybersecurity",
+			"Personal Website"
+		]
+	}
+}
