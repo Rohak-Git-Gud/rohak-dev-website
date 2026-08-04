@@ -5,11 +5,11 @@
 		"skills": [
 			{ "name": "Python", "proficient": true },
 			{ "name": "TypeScript", "proficient": true },
-			{ "name": "JavaScript" },
+			{ "name": "JavaScript", "proficient": true },
 			{ "name": "C#"},
 			{ "name": "Java"},
-			{ "name": "Go"},
-			{ "name": "Bash" }
+			{ "name": "Bash"},
+			{ "name": "SQL", "proficient": true }
 		]
 	},
 	{
@@ -17,6 +17,7 @@
 		"title": "Frameworks & Libraries",
 		"skills": [
 			{ "name": "Django", "proficient": true },
+			{ "name": "Node.js" },
 			{ "name": "Express.js" },
 			{ "name": "Next.js", "proficient": true },
 			{ "name": "ASP.NET"}
@@ -35,37 +36,38 @@
 	},
 	{
 		"category": "devsecops",
-		"title": "DevSecOps & Cloud",
+		"title": "DevSecOps",
 		"skills": [
 			{ "name": "AWS" },
 			{ "name": "Jenkins", "proficient": true },
-			{ "name": "Nmap" },
 			{ "name": "Wireshark" },
-			{ "name": "Nginx" },
-			{ "name": "Docker" },
+			{ "name": "Nmap" },
+			{ "name": "Docker", "proficient": true },
 			{ "name": "Kubernetes" }
 		]
 	},
 	{
-		"category": "observability",
-		"title": "Observability",
+		"category": "sre",
+		"title": "Performance & SRE",
 		"skills": [
-			{ "name": "Grafana", "proficient": true },
 			{ "name": "Dynatrace", "proficient": true },
-			{ "name": "AppDynamics" }
-		]
-	},
-	{
-		"category": "tools",
-		"title": "Tools & Other Misc.",
-		"skills": [
-			{ "name": "Linux", "proficient": true },
-			{ "name": "Git", "proficient": true },
-			{ "name": "Antigravity", "proficient": true },
-			{ "name": "REST APIs", "proficient": true },
+			{ "name": "AppDynamics" },
+			{ "name": "Grafana", "proficient": true },
 			{ "name": "Postman" },
 			{ "name": "NeoLoad" },
 			{ "name": "JMeter" }
+		]
+	},
+	{
+		"category": "misc",
+		"title": "Miscellaneous",
+		"skills": [
+			{ "name": "Linux", "proficient": true },
+			{ "name": "Git" },
+			{ "name": "Antigravity" },
+			{ "name": "REST APIs" },
+			{ "name": "CI/CD" },
+			{ "name": "Atlassian Suite" }
 		]
 	}
 ]

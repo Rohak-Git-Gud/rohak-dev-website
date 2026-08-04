@@ -29,7 +29,7 @@
 		"startDate": "Jul-2022",
 		"endDate": "Dec-2024",
 		"description": "Transformed performance operations for a Fortune 500 consumer electronics leader by delivering a 30% boost in system capacity and halving project timelines through custom automation. Specialized in root-cause analysis of bottlenecks and modernized testing infrastructure.",
-		"skills": ["Performance & SRE", "RCA & Optimization", "Automation", "Bash", "Docker", "Node.js", "Python"],
+		"skills": ["Performance & SRE", "RCA & Optimization", "Automation", "Bash", "Docker", "Node.js", "Python", "TypeScript"],
 		"image": "/images/timeline/accenture.jpg"
 	},
 	{
@@ -39,7 +39,7 @@
 		"organization": "Personal",
 		"startDate": "Jan-2025",
 		"endDate": "Apr-2025",
-		"description": "Not declaring my medical history and diagnosis here. But, it's resolved.",
+		"description": "Taking care of yourself isn't optional. Not declaring my medical history and diagnosis here. But, everything's fine and dandy now.",
 		"skills": ["Patience", "Tenacity", "Resilience"],
 		"image": "/images/timeline/medical.jpg"
 	},
@@ -57,12 +57,12 @@
 	{
 		"id": 6,
 		"category": "work",
-		"title": "Technical Consultant",
-		"organization": "Freelancer",
+		"title": "Software Engineer",
+		"organization": "Self-Employed (Freelancer)",
 		"startDate": "Jul-2025",
 		"endDate": "Present",
-		"description": "Engineered an automated invoicing OCR pipeline to transform unstructured invoice data into structured insights. Led a comprehensive full-stack audit for an e-commerce platform, delivering strategic optimizations for performance, security hardening and WCAG accessibility.",
-		"skills": ["Technical Audit", "Automation", "Python", "n8n", "Tessaract OCR"],
+		"description": "Engineered an automated invoicing pipeline combining OCR and AI-assisted extraction to process 500+ monthly emails. Conducted a security audit for an e-commerce platform, identifying and mitigating vulnerabilities and misconfigurations, resulting in improved security posture.",
+		"skills": ["Security Audit", "Automation", "Python", "n8n", "Claude", "Tesseract OCR"],
 		"image": "/images/timeline/freelancer.jpg"
 	}
 ]

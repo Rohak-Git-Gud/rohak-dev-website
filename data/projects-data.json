@@ -2,7 +2,7 @@
 	{
 		"id": 1,
 		"title": "CMS Arch Research",
-		"description": "Built parallel CMS implementations to benchmark efficiency and scalability. Conducted stress tests to evaluate performance. Leveraged AI-driven prototyping to streamline the SDLC.",
+		"description": "Built parallel full-stack CMS implementations to benchmark middleware overhead, ORM query efficiency and developer ease under high-load scenarios. Findings and trade-offs documented in the source.",
 		"skills": ["Research", "Full-Stack", "Perf Benchmarking", "Python", "Django", "JavaScript", "Express.js"],
 		"githubUrl": "/research-cms-archs-express-django",
 		"createdDate": "Jul-2025",
@@ -11,8 +11,8 @@
 	},
 	{
 		"id": 2,
-		"title": "Credntial Retriever",
-		"description": "Engineered a stateless CLI utility that generates creds using multi-stage recursive hashing and salting. Need for credential storage evaporates along with DB leak risks.",
+		"title": "Creds Retriever CLI",
+		"description": "Engineered a stateless, logless CLI that deterministically derives credentials through recursive multi-stage hashing. Built on Zero Trust Model (ZTM) principles, credential harvesting risk eliminated by design.",
 		"skills": ["Zero Trust Model", "Python", "Hash & Salt"],
 		"githubUrl": "/password-generator-py",
 		"createdDate": "Sep-2025",
@@ -22,9 +22,9 @@
 	{
 		"id": 3,
 		"title": "Dev Site Template",
-		"description": "A high-performance personal website template built with a developer-first mindset. Featuring a centralized data hub for managing site content by driving everything through simple, easy-to-edit data files. You're HERE.",
+		"description": "A high-performance personal website template built with a developer-first mindset. Has a centralized data hub for managing site content. Edit everything through simple, easy-to-edit data files. You're HERE.",
 		"skills": ["Dev Website", "Template", "Next.js", "TypeScript", "Tailwind CSS", "ShadCN"],
-		"githubUrl": "/rohak-dev-website",
+		"githubUrl": "/dev-website-template",
 		"createdDate": "Apr-2026",
 		"isLive": true,
 		"liveUrl": "https://rohak-dev.vercel.app/",

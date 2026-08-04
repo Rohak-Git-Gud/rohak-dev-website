@@ -1,4 +1,4 @@
-export type SkillCategory = "languages" | "frameworks" | "databases" | "devsecops" | "observability" | "tools";
+export type SkillCategory = "languages" | "frameworks" | "databases" | "devsecops" | "sre" | "misc";
 // You're free to add more categories if needed.
 // But check /lib/master-color-scheme.ts and update color scheme accordingly.
 

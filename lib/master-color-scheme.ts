@@ -51,28 +51,28 @@ export const categoryColors: Record<CategoryType, ColorScheme> = {
 		badge: "bg-orange-600 dark:bg-amber-500/90 text-white dark:text-black hover:bg-orange-600/80 dark:hover:bg-amber-500",
 	},
 
-	// Slate/Zinc - Break & Tools
+	// Slate/Zinc - Break & Miscellaneous
 	break: {
 		text: "text-slate-700 dark:text-zinc-300/90",
 		border: "border-slate-700 dark:border-zinc-300/90",
 		bg: "bg-slate-700 dark:bg-zinc-300/90",
 	},
-	tools: {
+	misc: {
 		text: "text-slate-700 dark:text-zinc-300/90",
 		border: "border-slate-700 dark:border-zinc-300/90",
 		bg: "bg-slate-700 dark:bg-zinc-300/90",
 		badge: "bg-slate-700 dark:bg-zinc-300/90 text-white dark:text-black hover:bg-slate-700/80 dark:hover:bg-zinc-300",
 	},
 
-	// Yellow - DevOps
-	observability: {
+	// Yellow - Performance & SRE
+	sre: {
 		text: "text-yellow-600 dark:text-yellow-400/90",
 		border: "border-yellow-600 dark:border-yellow-400/90",
 		bg: "bg-yellow-600 dark:bg-yellow-400/90",
 		badge: "bg-yellow-600 dark:bg-yellow-400/90 text-white dark:text-black hover:bg-yellow-600/80 dark:hover:bg-yellow-400",
 	},
 
-	// Rose - Security
+	// Rose - DevSecOps
 	devsecops: {
 		text: "text-rose-800 dark:text-rose-200/90",
 		border: "border-rose-800 dark:border-rose-200/90",
@@ -90,5 +90,5 @@ export const photoBorderColors = [
 	categoryColors.frameworks.border,
 	categoryColors.databases.border,
 	categoryColors.devsecops.border,
-	categoryColors.observability.border,
+	categoryColors.sre.border,
 ];

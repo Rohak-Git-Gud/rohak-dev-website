@@ -53,14 +53,9 @@ export function Hero() {
 					</div>
 
 					<div className="flex flex-wrap items-center gap-3">
-						<div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+						<div className="flex items-center gap-2 text-base font-medium text-muted-foreground">
 							<MapPin className="w-4 h-4" />
-							<span>{siteMetadata.location}</span>
-						</div>
-
-						<div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-							<Calendar className="w-4 h-4" />
-							<span>{new Date().getFullYear() - parseInt(siteMetadata.birthYear)} years old</span>
+							<span>Based in: {siteMetadata.location}</span>
 						</div>
 					</div>
 
