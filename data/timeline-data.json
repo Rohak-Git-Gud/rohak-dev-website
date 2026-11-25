@@ -58,9 +58,9 @@
 		"id": 6,
 		"category": "work",
 		"title": "Software Engineer",
-		"organization": "Self-Employed (Freelancer)",
+		"organization": "Self Employed (Freelancer)",
 		"startDate": "Jul-2025",
-		"endDate": "Present",
+		"endDate": "Oct-2026",
 		"description": "Engineered an automated invoicing pipeline combining OCR and AI-assisted extraction to process 500+ monthly emails. Conducted a security audit for an e-commerce platform, identifying and mitigating vulnerabilities and misconfigurations, resulting in improved security posture.",
 		"skills": ["Security Audit", "Automation", "Python", "n8n", "Claude", "Tesseract OCR"],
 		"image": "/images/timeline/freelancer.jpg"

@@ -11,7 +11,7 @@
 	},
 	{
 		"id": 2,
-		"title": "Creds Retriever CLI",
+		"title": "PassGen CLI",
 		"description": "Engineered a stateless, logless CLI that deterministically derives credentials through recursive multi-stage hashing. Built on Zero Trust Model (ZTM) principles, credential harvesting risk eliminated by design.",
 		"skills": ["Zero Trust Model", "Python", "Hash & Salt"],
 		"githubUrl": "/password-generator-py",

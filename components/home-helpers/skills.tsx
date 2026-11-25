@@ -12,6 +12,7 @@ const data = skillsData as SkillGroup[];
 
 export function SkillsSection() {
 	const [selectedCategories, setSelectedCategories] = React.useState<SkillCategory[]>([]);
+	const [onlyProficient, setOnlyProficient] = React.useState(false);
 
 	const toggleCategory = (category: SkillCategory) => {
 		setSelectedCategories((prev) =>
@@ -19,8 +20,13 @@ export function SkillsSection() {
 		);
 	};
 
-	const filteredData =
-		selectedCategories.length > 0 ? data.filter((group) => selectedCategories.includes(group.category)) : data;
+	const filteredData = data
+		.filter((group) => (selectedCategories.length > 0 ? selectedCategories.includes(group.category) : true))
+		.map((group) => ({
+			...group,
+			skills: onlyProficient ? group.skills.filter((skill) => skill.proficient) : group.skills,
+		}))
+		.filter((group) => group.skills.length > 0);
 
 	return (
 		<section id="skills" className="container mx-auto px-4 md:px-8 py-3 md:py-6 flex flex-col items-center">
@@ -28,9 +34,10 @@ export function SkillsSection() {
 			<p className="text-muted-foreground mb-8 max-w-[800px] text-center">{flavorText.skills}</p>
 
 			{/* Filter */}
-			<div className="flex flex-wrap justify-center gap-2 mb-8">
+			<div className="flex flex-wrap items-center justify-center gap-2 mb-8">
 				<Button
 					variant={selectedCategories.length === 0 ? "default" : "outline"}
+					size="sm"
 					onClick={() => setSelectedCategories([])}
 					className="rounded-full"
 				>
@@ -52,6 +59,18 @@ export function SkillsSection() {
 						</Button>
 					);
 				})}
+
+				<span className="h-5 w-px bg-border mx-1 hidden sm:inline-block" aria-hidden="true" />
+
+				{/* Confident Skills Button Filter */}
+				<Button
+					variant={onlyProficient ? "default" : "outline"}
+					size="sm"
+					onClick={() => setOnlyProficient((prev) => !prev)}
+					className="capitalize rounded-full transition-all"
+				>
+					Filter Confident Skills Only
+				</Button>
 			</div>
 
 			{/* Legend */}
@@ -80,22 +99,24 @@ export function SkillsSection() {
 
 									{/* Skills Badges */}
 									<div className="flex flex-wrap gap-3">
-										{group.skills.map((skill, index) => {
-											const skillName = skill.name;
-											const isProficient = skill.proficient;
-											return (
-												<Badge
-													key={`${skillName}-${index}`}
-													className={`text-sm py-0.5 px-3 cursor-default transition-transform hover:scale-105 ${
-														isProficient
-															? "bg-primary text-primary-foreground hover:bg-primary/90 border-primary shadow-[0_0_8px_hsl(var(--primary)/0.4)]"
-															: categoryColors[group.category].badge
-													}`}
-												>
-													{skillName}
-												</Badge>
-											);
-										})}
+										{[...group.skills]
+											.sort((a, b) => (b.proficient ? 1 : 0) - (a.proficient ? 1 : 0))
+											.map((skill, index) => {
+												const skillName = skill.name;
+												const isProficient = skill.proficient;
+												return (
+													<Badge
+														key={`${skillName}-${index}`}
+														className={`text-sm py-0.5 px-3 cursor-default transition-transform hover:scale-105 ${
+															isProficient
+																? "bg-primary text-primary-foreground hover:bg-primary/90 border-primary shadow-[0_0_8px_hsl(var(--primary)/0.4)]"
+																: categoryColors[group.category].badge
+														}`}
+													>
+														{skillName}
+													</Badge>
+												);
+											})}
 									</div>
 								</div>
 							</CardContent>
